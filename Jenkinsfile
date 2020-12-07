@@ -14,6 +14,7 @@ pipeline {
     stage('Clone the repo of testng-cucumber') {
       steps {
         git credentialsId: '02577ad1-6206-4d6f-8284-db061b89cac7', url: 'https://github.com/wissen-qa/testng-cucumber.git'
+        sh "pwd"
       }
     }
     stage('Docker Push') {
