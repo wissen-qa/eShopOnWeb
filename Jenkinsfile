@@ -6,6 +6,11 @@ pipeline {
         sh " cd tests/UnitTests/ && dotnet test"
       }
     }
+    stage('Execute Integration Test') {
+      steps {
+        sh " cd  tests/IntegrationTests/ && dotnet test"
+      }
+    }
     stage('Docker Build') {
       steps {
         sh "sudo docker-compose build"
