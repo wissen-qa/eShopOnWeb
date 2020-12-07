@@ -21,9 +21,7 @@ pipeline {
     }
     stage('Clone the repo of testng-cucumber') {
       steps {
-        sh "git clone https://github.com/wissen-qa/testng-cucumber.git"
-        sh "cd testng-cucumber && sudo su && mvn clean test"
-        
+        checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '02577ad1-6206-4d6f-8284-db061b89cac7', url: 'https://github.com/wissen-qa/testng-cucumber.git']]]
       }
     }
     stage('Docker Push') {
