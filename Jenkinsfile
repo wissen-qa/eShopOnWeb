@@ -1,14 +1,6 @@
 pipeline {
   agent any
   stages {
-    stage('Docker Build') {
-      steps {
-        sh "sudo docker-compose build"
-        sh "sudo docker ps --filter 'label=name=Demo_App' -q | xargs --no-run-if-empty sudo docker container stop"
-        sh "sudo docker ps --filter 'label=name=Demo_App' -q | xargs -r sudo docker container rm"
-        sh "sudo docker-compose up -d"
-      }
-    }
     stage('Execute UnitTest') {
       steps {
         sh " cd tests/UnitTests/ && dotnet test"
@@ -17,6 +9,14 @@ pipeline {
     stage('Execute Integration Test') {
       steps {
         sh " cd  tests/IntegrationTests/ && dotnet test"
+      }
+    }
+    stage('Docker Build') {
+      steps {
+        sh "sudo docker-compose build"
+        sh "sudo docker ps --filter 'label=name=Demo_App' -q | xargs --no-run-if-empty sudo docker container stop"
+        sh "sudo docker ps --filter 'label=name=Demo_App' -q | xargs -r sudo docker container rm"
+        sh "sudo docker-compose up -d"
       }
     }
     stage('Clone the repo of testng-cucumber') {
