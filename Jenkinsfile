@@ -22,7 +22,7 @@ pipeline {
     stage('Clone the repo of testng-cucumber') {
       steps {
         sh "git clone https://github.com/wissen-qa/testng-cucumber.git"
-        sh "cd testng-cucumber && mvn clean test"
+        sh "cd testng-cucumber && sudo su && mvn clean test"
         
       }
     }
