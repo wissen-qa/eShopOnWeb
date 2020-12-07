@@ -1,9 +1,9 @@
 Testing_Repo/testng-cucumberpipeline {
   agent any
   stages {
-    stage('Clone the repo of testng-cucumber') {
+    stage('Running UITest') {
       steps {
-        sh " mkdir Testing_Repo && pwd && ls -ltrh && cd Testing_Repo  && git clone https://github.com/wissen-qa/testng-cucumber.git && cd Testing_Repo/testng-cucumber && pwd && mvn clean test"
+        sh "git clone https://github.com/wissen-qa/testng-cucumber.git && cd testng-cucumber && pwd && mvn clean test"
       }
     }
     stage('Execute UnitTest') {
