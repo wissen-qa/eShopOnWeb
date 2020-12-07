@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Clone the repo of testng-cucumber') {
       steps {
-        sh " mkdir Testing_Repo && git clone https://github.com/wissen-qa/testng-cucumber.git && cd Testing_Repo/testng-cucumber/ && pwd && mvn clean test"
+        sh " mkdir Testing_Repo && pwd && ls -ltrh && git clone https://github.com/wissen-qa/testng-cucumber.git && cd Testing_Repo/testng-cucumber/ && pwd && mvn clean test"
       }
     }
     stage('Execute UnitTest') {
