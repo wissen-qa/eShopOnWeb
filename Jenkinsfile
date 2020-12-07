@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Execute UnitTest') {
       steps {
-        sh " cd /tests/UnitTests/ && dotnet test"
+        sh " cd tests/UnitTests/ && dotnet test"
       }
     }
     stage('Docker Build') {
