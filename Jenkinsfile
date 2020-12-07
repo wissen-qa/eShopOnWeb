@@ -1,9 +1,9 @@
 Testing_Repo/testng-cucumberpipeline {
   agent any
   stages {
-    stage('Running UITest') {
+    stage('Execute UnitTest') {
       steps {
-        sh "git clone https://github.com/wissen-qa/testng-cucumber.git && cd testng-cucumber && pwd && mvn clean test"
+        git credentialsId: '02577ad1-6206-4d6f-8284-db061b89cac7', url: 'https://github.com/wissen-qa/testng-cucumber.git'
       }
     }
     stage('Execute UnitTest') {
