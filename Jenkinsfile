@@ -1,6 +1,11 @@
 pipeline {
   agent any
   stages {
+    stage('Clone the repo of testng-cucumber') {
+      steps {
+        sh " mkdir Testing_Repo && git clone https://github.com/wissen-qa/testng-cucumber.git && cd Testing_Repo/testng-cucumber/ && pwd && mvn clean test"
+      }
+    }
     stage('Execute UnitTest') {
       steps {
         sh " cd tests/UnitTests/ && dotnet test"
@@ -17,11 +22,6 @@ pipeline {
         sh "sudo docker ps --filter 'label=name=Demo_App' -q | xargs --no-run-if-empty sudo docker container stop"
         sh "sudo docker ps --filter 'label=name=Demo_App' -q | xargs -r sudo docker container rm"
         sh "sudo docker-compose up -d"
-      }
-    }
-    stage('Clone the repo of testng-cucumber') {
-      steps {
-        checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '02577ad1-6206-4d6f-8284-db061b89cac7', url: 'https://github.com/wissen-qa/testng-cucumber.git']]]
       }
     }
     stage('Docker Push') {
