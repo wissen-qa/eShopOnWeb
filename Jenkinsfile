@@ -1,6 +1,11 @@
 pipeline {
   agent any
   stages {
+    stage('Clone the repo of testng-cucumber') {
+      steps {
+        sh "rm -rf testng-cucumber && mkdir testng-cucumber && cd testng-cucumber/ && git clone https://github.com/wissen-qa/testng-cucumber.git && cd testng-cucumber/testng-cucumber && ls -ltrh"
+      }
+    }
     stage('Execute UnitTest') {
       steps {
         sh " cd tests/UnitTests/ && dotnet test"
@@ -9,11 +14,6 @@ pipeline {
     stage('Execute Integration Test') {
       steps {
         sh " cd  tests/IntegrationTests/ && dotnet test"
-      }
-    }
-    stage('Clone the repo of testng-cucumber') {
-      steps {
-        sh "mkdir testng-cucumber && cd testng-cucumber/ && git clone https://github.com/wissen-qa/testng-cucumber.git && cd testng-cucumber/testng-cucumber && ls -ltrh"
       }
     }
     stage('Docker Push') {
