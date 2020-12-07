@@ -4,7 +4,7 @@ pipeline {
     stage('Clone the repo of testng-cucumber') {
       steps {
         sh "rm -rf testng-cucumber && mkdir testng-cucumber && cd testng-cucumber/ && git clone https://github.com/wissen-qa/testng-cucumber.git && cd testng-cucumber && ls -ltrh"
-        sh "pwd && export PATH=$PATH:/opt/apache-maven-3.5.3/bin && mvn"   
+        sh "pwd && export PATH=$PATH:/opt/apache-maven-3.5.3/bin && mvn"
     }
     stage('Execute UnitTest') {
       steps {
