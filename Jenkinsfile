@@ -1,6 +1,11 @@
 pipeline {
   agent any
   stages {
+    stage('Execute UnitTest') {
+      steps {
+        sh " cd /tests/UnitTests/ && dotnet test"
+      }
+    }
     stage('Docker Build') {
       steps {
         sh "sudo docker-compose build"
