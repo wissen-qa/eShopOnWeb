@@ -9,6 +9,7 @@ pipeline {
     stage('CodeCoverage and Static Code Report') {
       steps {
         sh "pwd && ls -ltrh"
+        sh "export PATH=$PATH:/home/BuildMachine/.dotnet/tools"
         sh "dotnet tool install dotnet-sonarscanner"
         sh "dotnet sonarscanner begin /k:e09a98e2b9b267b2086c33c4cf1d40750e51f072 /d:sonar.host.url=http://20.55.120.136:9000"
         sh "dotnet build eShopOnWeb.sln"
