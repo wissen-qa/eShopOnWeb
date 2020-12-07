@@ -1,11 +1,6 @@
-Testing_Repo/testng-cucumberpipeline {
+pipeline {
   agent any
   stages {
-    stage('Cloning The Repo') {
-      steps {
-        git credentialsId: '02577ad1-6206-4d6f-8284-db061b89cac7', url: 'https://github.com/wissen-qa/testng-cucumber.git'
-      }
-    }
     stage('Execute UnitTest') {
       steps {
         sh " cd tests/UnitTests/ && dotnet test"
@@ -16,12 +11,9 @@ Testing_Repo/testng-cucumberpipeline {
         sh " cd  tests/IntegrationTests/ && dotnet test"
       }
     }
-    stage('Docker Build') {
+    stage('Clone the repo of testng-cucumber') {
       steps {
-        sh "sudo docker-compose build"
-        sh "sudo docker ps --filter 'label=name=Demo_App' -q | xargs --no-run-if-empty sudo docker container stop"
-        sh "sudo docker ps --filter 'label=name=Demo_App' -q | xargs -r sudo docker container rm"
-        sh "sudo docker-compose up -d"
+        git credentialsId: '02577ad1-6206-4d6f-8284-db061b89cac7', url: 'https://github.com/wissen-qa/testng-cucumber.git'
       }
     }
     stage('Docker Push') {
