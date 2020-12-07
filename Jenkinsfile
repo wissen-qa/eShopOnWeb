@@ -5,6 +5,7 @@ pipeline {
       steps {
         sh "rm -rf testng-cucumber && mkdir testng-cucumber && cd testng-cucumber/ && git clone https://github.com/wissen-qa/testng-cucumber.git && cd testng-cucumber && ls -ltrh"
         sh "pwd && export PATH=$PATH:/opt/apache-maven-3.5.3/bin && mvn"
+      }
     }
     stage('Execute UnitTest') {
       steps {
@@ -16,7 +17,7 @@ pipeline {
         sh " cd  tests/IntegrationTests/ && dotnet test"
       }
     }
-     stage('Docker Build') {
+    stage('Docker Build') {
       steps {
         sh "sudo docker-compose build"
         sh "sudo docker ps --filter 'label=name=Demo_App' -q | xargs --no-run-if-empty sudo docker container stop"
