@@ -6,6 +6,13 @@ pipeline {
         sh " cd tests/UnitTests/ && dotnet test"
       }
     }
+    stage('CodeCoverage and Static Code Report') {
+      steps {
+        sh "dotnet sonarscanner begin /k:e09a98e2b9b267b2086c33c4cf1d40750e51f072 /d:sonar.host.url=http://20.55.120.136:9000"
+        sh "dotnet build eShopOnWeb.sln"
+        sh "dotnet sonarscanner end"
+      }
+    }
     stage('Execute Integration Test') {
       steps {
         sh " cd  tests/IntegrationTests/ && dotnet test"
@@ -27,7 +34,7 @@ pipeline {
     }
     stage('Docker Remove Image') {
       steps {
-        sh "docker image prune -a"
+        sh "docker image prune -a --force"
       }
     }
 }
