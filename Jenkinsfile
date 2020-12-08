@@ -35,7 +35,6 @@ pipeline {
         sh "docker image prune -a --force"
       }
     }
-}
   stage('Slack Notifications') {
       steps {
         sh "slackSend baseUrl: 'https://hooks.slack.com/services/', 
@@ -53,5 +52,6 @@ post {
     failure {
       slackSend(message: "Pipeline failed. Please check the logs.")
     }
+}
 }
 }
