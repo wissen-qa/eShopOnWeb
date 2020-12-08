@@ -8,7 +8,7 @@ pipeline {
     }
     stage('CodeCoverage and Static Code Report') {
       steps {
-        sh "pwd && ls -ltrh"
+        sh "pwd && ls -ltrh && hostname"
         sh "export PATH=$PATH:/home/BuildMachine/.dotnet/tools"
         sh "cp /home/BuildMachine/.dotnet/tools/dotnet-sonarscanner ."
         sh "ls -ltrh"
