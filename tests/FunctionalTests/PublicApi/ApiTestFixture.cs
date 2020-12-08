@@ -62,7 +62,7 @@ namespace Microsoft.eShopWeb.FunctionalTests.PublicApi
                         // Seed the database with test data.
                         CatalogContextSeed.SeedAsync(db, loggerFactory).Wait();
 
-                        // seed sample user data
+                        // seed sample user data 
                         var userManager = scopedServices.GetRequiredService<UserManager<ApplicationUser>>();
                         var roleManager = scopedServices.GetRequiredService<RoleManager<IdentityRole>>();
                         AppIdentityDbContextSeed.SeedAsync(userManager, roleManager).Wait();
