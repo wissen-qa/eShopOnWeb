@@ -35,16 +35,7 @@ pipeline {
         sh "docker image prune -a --force"
       }
     }
-  stage('Slack Notifications') {
-      steps {
-        sh "slackSend baseUrl: 'https://hooks.slack.com/services/', 
-        channel: '#jenkins-pipeline-demo', 
-        color: 'good', 
-        message: 'Welcome to jenkins-pipeline-demo channel', 
-        teamDomain: 'jenkins-pipeline-demo', 
-        tokenCredentialId: 'Slack-creds'"
-      }
-    }
+  }
 post {
     success {
       slackSend(message: "Pipeline is successfully completed.")
@@ -54,4 +45,4 @@ post {
     }
 }
 }
-}
+
