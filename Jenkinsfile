@@ -32,7 +32,7 @@ pipeline {
     }
     stage('Docker Remove Image') {
       steps {
-        sh "docker image prune -a --force"
+        sh "sudo docker image prune -a --force"
       }
     }
   }
