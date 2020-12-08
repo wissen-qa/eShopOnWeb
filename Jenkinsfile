@@ -38,7 +38,13 @@ pipeline {
   }
 post {
     success {
-      slackSend(message: "Pipeline is successfully completed.")
+      /slackSend(message: "Pipeline is successfully completed.")
+      slackSend(baseUrl: 'https://hooks.slack.com/services/', 
+        channel: '#jenkins-pipeline-demo', 
+        color: 'good', 
+        message: 'Welcome to jenkins-pipeline-demo channel', 
+        teamDomain: 'jenkins-pipeline-demo', 
+        tokenCredentialId: 'Slack-creds')
     }
     failure {
       slackSend(message: "Pipeline failed. Please check the logs.")
