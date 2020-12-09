@@ -1,6 +1,12 @@
 pipeline {
   agent any
   stages {
+    stage('Job Started') {
+      steps {
+        // send job started notifications
+        slackSend (color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+      }
+    }
     stage('Execute UnitTest') {
       steps {
         sh " cd tests/UnitTests/ && dotnet test"
@@ -18,8 +24,6 @@ pipeline {
     }
     stage('Docker Build') {
       steps {
-	// send build started notifications
-	slackSend (color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
         sh "sudo docker-compose build"
         sh "sudo docker ps --filter 'label=name=Demo_App' -q | xargs --no-run-if-empty sudo docker container stop"
         sh "sudo docker ps --filter 'label=name=Demo_App' -q | xargs -r sudo docker container rm"
