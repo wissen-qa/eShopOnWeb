@@ -3,8 +3,6 @@ pipeline {
   stages {
     stage('Execute UnitTest') {
       steps {
-	 // send job started notifications
-        slackSend (color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
         sh " cd tests/UnitTests/ && dotnet test"
       }
     }
