@@ -24,7 +24,7 @@ pipeline {
         sh "sudo docker-compose up -d"
       }
     }
-    stage('Clone the repo of Testng-Cucumber') {
+    stage('E2E Execution') {
       steps {
         sh "rm -rf testng-cucumber && mkdir testng-cucumber && cd testng-cucumber/ && git clone https://github.com/wissen-qa/testng-cucumber.git && cd testng-cucumber && ls -ltrh"
         sh "pwd && cd testng-cucumber/testng-cucumber && export PATH=$PATH:/opt/apache-maven-3.5.3/bin && mvn clean test"
