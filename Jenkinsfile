@@ -16,7 +16,7 @@ pipeline {
         sh " cd  tests/IntegrationTests/ && dotnet test"
       }
     }
-    stage('Docker Build') {
+    stage('Deploy') {
       steps {
         sh "sudo docker-compose build"
         sh "sudo docker ps --filter 'label=name=Demo_App' -q | xargs --no-run-if-empty sudo docker container stop"
@@ -30,7 +30,7 @@ pipeline {
         sh "pwd && cd testng-cucumber/testng-cucumber && export PATH=$PATH:/opt/apache-maven-3.5.3/bin && mvn clean test"
       }
     }
-    stage('Docker Remove Image') {
+    stage('Cleanup Docker Images') {
       steps {
         sh "sudo docker image prune -a --force"
       }
